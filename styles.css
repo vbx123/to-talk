@@ -1,21 +1,41 @@
-
 body {
     font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
     text-align: center;
     margin: 0;
-    padding: 0;
-    background: #f4f6f8;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 h1 {
     color: #2a9d8f;
+    margin-bottom: 20px;
 }
 
-#username {
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    text-align: left;
+}
+
+textarea {
+    width: 100%;
     padding: 10px;
-    font-size: 18px;
-    width: 250px;
-    margin-bottom: 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
 }
 
 button {
@@ -27,28 +47,24 @@ button {
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 button:hover {
     background-color: #21867a;
 }
 
-#output {
+.result-box {
     margin-top: 20px;
-    font-size: 20px;
-    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f4f6f8;
+    font-size: 16px;
+    display: none;
 }
 
-#instructions {
-    margin-top: 10px;
+#record-status {
     color: #e76f51;
+    margin-top: 10px;
 }
-
-#main-screen {
-    padding: 20px;
-}
-
-#start-btn, #play-btn {
-    margin-top: 20px;
-}
-

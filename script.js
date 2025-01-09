@@ -1,31 +1,35 @@
+// عناصر HTML
 const translateBtn = document.getElementById('translate-btn');
 const recordBtn = document.getElementById('record-btn');
 const playCorrectBtn = document.getElementById('play-correct-btn');
-
 const sentenceInput = document.getElementById('sentence-input');
 const translatedSentenceBox = document.getElementById('translated-sentence');
 const analysisResultBox = document.getElementById('analysis-result');
 const recordStatus = document.getElementById('record-status');
 
-let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = "en-US";
-recognition.continuous = false;
-
-// **الترجمة**
-translateBtn.addEventListener('click', () => {
+// ترجمة الجملة باستخدام API
+translateBtn.addEventListener('click', async () => {
     const text = sentenceInput.value.trim();
     if (!text) {
-        alert("من فضلك اكتب جملة.");
+        alert("يرجى إدخال الجملة أولاً.");
         return;
     }
 
-    // استخدام API للترجمة (محاكاة الترجمة هنا)
-    const translatedText = text === "أنا محمد من مصر" ? "I am Muhammad from Egypt" : "Translation feature coming soon!";
-    translatedSentenceBox.textContent = `الجملة المترجمة: ${translatedText}`;
-    translatedSentenceBox.style.display = "block";
+    try {
+        const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=ar|en`);
+        const data = await response.json();
+        const translatedText = data.responseData.translatedText;
+        translatedSentenceBox.textContent = `الجملة المترجمة: ${translatedText}`;
+        translatedSentenceBox.style.display = "block";
+    } catch (error) {
+        alert("حدث خطأ أثناء الترجمة.");
+    }
 });
 
-// **التسجيل الصوتي**
+// التسجيل وتحليل النطق
+let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+recognition.lang = "en-US";
+
 recordBtn.addEventListener('click', () => {
     recordStatus.textContent = "جاري التسجيل...";
     recognition.start();
@@ -51,13 +55,11 @@ recognition.onresult = (event) => {
     });
 
     const accuracy = Math.round((correctWordCount / correctWords.length) * 100);
-
     analysisResultBox.innerHTML = `
-        <p>النطق: ${accuracy}% صحيح.</p>
+        <p>نسبة النطق الصحيح: ${accuracy}%</p>
         <p>الجملة التي نطقتها: ${userSpeech}</p>
     `;
     analysisResultBox.style.display = "block";
-
     recordStatus.textContent = "تم الانتهاء من التسجيل.";
     playCorrectBtn.style.display = "inline";
 };
@@ -66,7 +68,7 @@ recognition.onerror = (event) => {
     recordStatus.textContent = `حدث خطأ أثناء التسجيل: ${event.error}`;
 };
 
-// **النطق الصحيح**
+// النطق الصحيح للجملة
 playCorrectBtn.addEventListener('click', () => {
     const correctSentence = translatedSentenceBox.textContent.split(":")[1]?.trim();
     if (!correctSentence) {

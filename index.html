@@ -3,31 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تقييم النطق</title>
+    <title>تحليل النطق وتصحيح الأخطاء</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>تحليل النطق وتصحيح الأخطاء</h1>
-        
-        <div class="input-section">
-            <label for="sentence-input">اكتب الجملة (بالإنجليزية أو العربية):</label>
-            <textarea id="sentence-input" placeholder="اكتب الجملة هنا..." rows="3"></textarea>
-            <button id="translate-btn">ترجمة الجملة</button>
-        </div>
+        <h1>✨ تقييم النطق ✨</h1>
+        <p>اكتب الجملة التي تريد نطقها (بالإنجليزية أو العربية):</p>
 
+        <textarea id="sentence-input" placeholder="اكتب هنا..." rows="3"></textarea>
+        <button id="translate-btn">ترجمة الجملة</button>
         <div id="translated-sentence" class="result-box"></div>
 
-        <div class="action-section">
-            <button id="record-btn">ابدأ التسجيل</button>
-            <p id="record-status">اضغط على الزر وابدأ النطق.</p>
-        </div>
+        <p>اضغط على زر التسجيل لنطق الجملة:</p>
+        <button id="record-btn">ابدأ التسجيل</button>
+        <p id="record-status">اضغط على الزر وابدأ التحدث.</p>
 
         <div id="analysis-result" class="result-box"></div>
-
         <button id="play-correct-btn" style="display: none;">استمع للنطق الصحيح</button>
     </div>
-
     <script src="script.js"></script>
 </body>
-    </html>
+</html>
